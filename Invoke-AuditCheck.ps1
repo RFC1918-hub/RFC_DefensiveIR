@@ -205,7 +205,7 @@ function Invoke-AuditCheck {
             Write-Host "Audit check complete. Results saved to $outputfile" -ForegroundColor Green
         }
         else {
-            $auditcheck | ConvertTo-Json -Depth 10
+            $auditcheck | ConvertTo-Json -Depth 25
         }
     }
     else {
