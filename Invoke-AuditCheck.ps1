@@ -95,7 +95,7 @@ function Get-PowerShellAuditPolicy {
         $powershellauditpolicy = @{}
         $powershellauditpolicy.Add("ScriptBlockLogging", $(try {if ((Get-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" -ErrorAction SilentlyContinue).EnableScriptBlockLogging -eq 1) {"Enabled"} else {"Disabled"}} catch {"Registry Key Not Found"}))
         $powershellauditpolicy.Add("ModuleLogging", $(try {if ((Get-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging" -ErrorAction SilentlyContinue).EnableModuleLogging -eq 1) {"Enabled"} else {"Disabled"}} catch {"Registry Key Not Found"}))
-        $powershellauditpolicy.Add("ModuleNames", $(try {(Get-Item -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames\")} catch {"Registry Key Not Found"}))
+        $powershellauditpolicy.Add("ModuleNames", $(try {(Get-ItemProperty -Path 'HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames')} catch {"Registry Key Not Found"}))
         $powershellauditpolicy.Add("Transcription", $(try {if ((Get-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription" -ErrorAction SilentlyContinue).EnableTranscripting -eq 1) {"Enabled"} else {"Disabled"}} catch {"Registry Key Not Found"}))
         $powershellauditpolicy.Add("TranscriptionOutputDirectory", $(try {(Get-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription" -ErrorAction SilentlyContinue).OutputDirectory} catch {"Registry Key Not Found"}))
         return $powershellauditpolicy
@@ -128,7 +128,7 @@ function Get-PowerShellAuditPolicy {
         }
         write-host "ModuleNames: " -NoNewline
         try {
-            write-host (Get-Item -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames\") -ForegroundColor Green
+            write-host (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames') -ForegroundColor Green
         }
         catch {
             write-host "Registry Key Not Found" -ForegroundColor Red
