@@ -201,7 +201,7 @@ function Invoke-AuditCheck {
         $sysmonconfig = Get-SysmonConfig -json
         $auditcheck = @{"HostDetails" = $hostdetails; "AuditPolicy" = $auditpolicy; "PowerShellAuditPolicy" = $powershellauditpolicy; "SysmonConfig" = $sysmonconfig}
         if ($outputfile.Length -ne 0) {
-            $auditcheck | ConvertTo-Json -Depth 10 | Out-File $outputfile
+            $auditcheck | ConvertTo-Json -Depth 25 | Out-File $outputfile
             Write-Host "Audit check complete. Results saved to $outputfile" -ForegroundColor Green
         }
         else {
