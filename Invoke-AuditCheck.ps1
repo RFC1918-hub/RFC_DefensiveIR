@@ -162,14 +162,14 @@ function Get-SysmonConfig {
 
     if ($json) {
         $sysmonconfig = @{}
-        $sysmonconfig.Add("SysmonConfig", $(try {if ((Get-Content -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Sysmon/Operational" -ErrorAction SilentlyContinue).Enabled -eq 1) {"Enabled"} else {"Disabled"}} catch {"Sysmon not installed"}))
+        $sysmonconfig.Add("SysmonConfig", $(try {if ((Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Sysmon/Operational" -ErrorAction SilentlyContinue).Enabled -eq 1) {"Enabled"} else {"Disabled"}} catch {"Sysmon not installed"}))
         return $sysmonconfig
     }
     else 
     {
         write-host "SysmonConfig: " -NoNewline
         try {
-            if ((Get-Content -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Sysmon/Operational" -ErrorAction SilentlyContinue).Enabled -eq 1) {
+            if ((Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Sysmon/Operational" -ErrorAction SilentlyContinue).Enabled -eq 1) {
                 write-host "Enabled" -ForegroundColor Green
             }
             else {
