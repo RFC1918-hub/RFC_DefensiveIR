@@ -183,7 +183,7 @@ function Get-SysmonConfig {
 }
 
 # main 
-function Invoke-AuditCheck {
+function Get-WindowsEventAuditing {
     param (
         [switch]$json,
         [Parameter(Mandatory=$false, HelpMessage="Output file name")] [string]$outputfile
@@ -191,7 +191,7 @@ function Invoke-AuditCheck {
 
     if (-not (isElevated)) {
         Write-Host "This script must be run in an elevated shell" -ForegroundColor Red
-        exit 1
+        return
     }
     
     if ($json) {
