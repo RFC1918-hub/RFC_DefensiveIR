@@ -158,7 +158,7 @@ Process {
     if (-not $List -and -not $Dump -and -not $Show) {
         Write-Host "Please specify either -List or -Dump or -Show" -ForegroundColor Red
         break
-    } elseif (-not (($Keyword -and $List) -or ($Keyword -and $Show))) {
+    } elseif ($Keyword -and -not ($List -or $Show)) {
         Write-Host "Please specify -List or -Show when using -Keyword" -ForegroundColor Red
         break
     } elseif ($ScriptBlockId -and -not $Dump) {
