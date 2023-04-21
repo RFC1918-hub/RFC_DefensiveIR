@@ -53,7 +53,7 @@ function Get-AuditPolicy {
 
     if ($json) {
         $auditpolicy = @{}
-        $catorgies = auditpol /list /category /r | ConvertFrom-Csv | Select -ExpandProperty "Category/Subcategory"
+        $catorgies = auditpol /list /category /r | ConvertFrom-Csv | Select-Object -ExpandProperty "Category/Subcategory"
         foreach ($catorgy in $catorgies) {
             $x = @{}
             $results = auditpol /get /category:$catorgy /r | ConvertFrom-Csv
